@@ -39,3 +39,32 @@ it("filters robots correctly", () => {
     },
   ]);
 });
+
+it("filters robots correctly", () => {
+  const mockProps3 = {
+    onRequestRobots: jest.fn(),
+    robots: [
+      {
+        id: 3,
+        name: "John",
+        email: "John@gmail.com",
+      },
+    ],
+    searchField: "a",
+    isPending: false,
+  };
+  const filteredRobots = [];
+  const wrapper2 = shallow(<MainPage {...mockProps3} />);
+  expect(wrapper2.instance().filterRobots()).toEqual(filteredRobots);
+});
+
+it("renders the loading list", () => {
+  const mockProps = {
+    onRequestRobots: jest.fn(),
+    robots: [],
+    searchField: "",
+    isPending: true,
+  };
+  const wrapper = shallow(<MainPage {...mockProps} />);
+  expect(wrapper).toMatchSnapshot();
+});
